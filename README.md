@@ -90,3 +90,31 @@ line con 0
 line aux 0
 line vty 0 4
  login
+
+```
+## RIP Authentication (Not Implemented in Packet Tracer)
+
+Packet Tracer does not support RIP authentication. In a real Cisco environment or more advanced simulation tools like GNS3 or Cisco VIRL, RIP authentication can be configured to enhance routing security.
+
+### Example Configuration for RIP Authentication:
+
+```plaintext
+key chain RIP_KEY
+ key 1
+  key-string yourkey
+
+interface GigabitEthernet0/0/0.101
+ ip rip authentication mode md5
+ ip rip authentication key-chain RIP_KEY
+
+interface GigabitEthernet0/0/0.102
+ ip rip authentication mode md5
+ ip rip authentication key-chain RIP_KEY
+
+interface GigabitEthernet0/0/0.103
+ ip rip authentication mode md5
+ ip rip authentication key-chain RIP_KEY
+
+interface GigabitEthernet0/0/1
+ ip rip authentication mode md5
+ ip rip authentication key-chain RIP_KEY
