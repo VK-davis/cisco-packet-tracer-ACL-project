@@ -33,6 +33,56 @@ The network topology consists of multiple VLANs connected to a router with sub-i
   - Denies traffic from untrusted host `11.11.1.2` to host `10.10.3.2`.
   - Permits all other IP traffic.
 
+## Access Control and Security
+
+### Line Console 0
+- **Password**: @DmIn852456
+- **Login**: Enabled
+
+### Line Auxiliary 0
+- **Password**: @DmIn852456
+- **Login**: Enabled
+
+### Line VTY 0 4
+- **Access Class**: 10 (inbound)
+- **Password**: @DmIn852456
+- **Login**: Enabled
+- **Transport Input**: Telnet
+
+## Logging Configuration
+
+### Packet Tracer Limitations
+- **Logging Buffered**: Packet Tracer supports logging buffered but with limited options.
+- **Logging Console**: Supported for basic console logging.
+- **Logging Monitor**: May not be fully supported in Packet Tracer. In real environments, it is used to log messages to remote sessions.
+
+## RIP Authentication (Not Implemented in Packet Tracer)
+
+Packet Tracer does not support RIP authentication. In a real Cisco environment or more advanced simulation tools like GNS3 or Cisco VIRL, RIP authentication can be configured to enhance routing security.
+
+### Example Configuration for RIP Authentication:
+
+```plaintext
+key chain RIP_KEY
+ key 1
+  key-string yourkey
+
+interface GigabitEthernet0/0/0.101
+ ip rip authentication mode md5
+ ip rip authentication key-chain RIP_KEY
+
+interface GigabitEthernet0/0/0.102
+ ip rip authentication mode md5
+ ip rip authentication key-chain RIP_KEY
+
+interface GigabitEthernet0/0/0.103
+ ip rip authentication mode md5
+ ip rip authentication key-chain RIP_KEY
+
+interface GigabitEthernet0/0/1
+ ip rip authentication mode md5
+ ip rip authentication key-chain RIP_KEY
+```
 ## Configuration Script
 
 The running configuration of the router is provided below:
@@ -92,29 +142,8 @@ line vty 0 4
  login
 
 ```
-## RIP Authentication (Not Implemented in Packet Tracer)
 
-Packet Tracer does not support RIP authentication. In a real Cisco environment or more advanced simulation tools like GNS3 or Cisco VIRL, RIP authentication can be configured to enhance routing security.
 
-### Example Configuration for RIP Authentication:
+## Additional Notes
 
-```plaintext
-key chain RIP_KEY
- key 1
-  key-string yourkey
-
-interface GigabitEthernet0/0/0.101
- ip rip authentication mode md5
- ip rip authentication key-chain RIP_KEY
-
-interface GigabitEthernet0/0/0.102
- ip rip authentication mode md5
- ip rip authentication key-chain RIP_KEY
-
-interface GigabitEthernet0/0/0.103
- ip rip authentication mode md5
- ip rip authentication key-chain RIP_KEY
-
-interface GigabitEthernet0/0/1
- ip rip authentication mode md5
- ip rip authentication key-chain RIP_KEY
+- **Packet Tracer Limitations**: Some advanced features such as `crypto key generate rsa` and full RIP authentication support are not available in Packet Tracer. Use GNS3 or Cisco VIRL for a complete feature set.
