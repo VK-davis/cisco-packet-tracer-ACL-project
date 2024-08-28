@@ -49,6 +49,25 @@ The network topology consists of multiple VLANs connected to a router with sub-i
 - **Login**: Enabled
 - **Transport Input**: Telnet
 
+**Important Security Note:**
+- **Telnet vs. SSH**: Telnet transmits data, including passwords, in plaintext, making it vulnerable to interception and eavesdropping. Using Telnet for remote management can pose significant security risks.
+  
+  **Recommendation**: It is highly recommended to use SSH (Secure Shell) instead of Telnet. SSH provides encrypted communication, ensuring that all data, including passwords, is securely transmitted. Cisco Packet Tracer does not support SSH configuration so I have omitted that. To configure SSH, follow these steps:
+
+  1. **Generate SSH Keys**:
+     ```plaintext
+     Router(config)# crypto key generate rsa
+     ```
+  2. **Configure SSH**:
+     ```plaintext
+     Router(config)# ip domain-name equilibrium.com
+     Router(config)# username admin password yourpassword
+     Router(config)# line vty 0 4
+     Router(config-line)# transport input ssh
+     Router(config-line)# login local
+     ```
+
+  By using SSH, you enhance the security of remote management and protect sensitive data from unauthorized access.
 ## Logging Configuration
 
 ### Packet Tracer Limitations
