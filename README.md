@@ -37,6 +37,7 @@ The network topology consists of multiple VLANs connected to a router with sub-i
 
 The running configuration of the router is provided below:
 
+```plaintext
 version 16.6.4
 no service timestamps log datetime msec
 no service timestamps debug datetime msec
